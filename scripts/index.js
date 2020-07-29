@@ -17,6 +17,12 @@ const rgba = (array) => {
     return "rgba(" + array[0] + ", " + array[1] + ", " + array[2] + ", " + array[3] + ")";
 }
 
+// Gets the angle between two points
+const angle = (x, y, x_2, y_2) => {
+    return Math.atan2((y - y_2), (x_2 - x));
+}
+
+
 // Rotates a 2D point about a point
 // x: The x of the point that is supposed to be rotated
 // y: The y of the point that is supposed to be rotated
@@ -30,15 +36,18 @@ const Rotate = (x, y, Theta, aboutX, aboutY) => {
     return rotatedGlobalPoint;
 };
 
-// Gets the angle between two points
-const angle = (x, y, x_2, y_2) => {
-    return Math.atan2((y - y_2), (x_2 - x));
+
+const Rotate3D = (x, y, z, pitch, yaw, roll) => {
+    return; // IMPLEMENT 
 }
+
 
 // Opens a window with the specified url
 const goto = (url) => {
     window.open(url, '_blank');
 }
+
+
 
 //#endregion Helpers
 
@@ -65,72 +74,153 @@ Drawing.maxout = () => {
     document.body.scroll = "no";                         // Internet explorer
 }
 
+
 // This obj holds everything that has to do with the user's device
 const Device = {}
 
-// Last recorded mouse location
 Device.mouseLocation = [0, 0];
-// Device aspect ratio
+
 Device.getAspectRatio = () => {
     return canvas.width / canvas.height;
 }
 
+
+//#endregion Initial Adjustments
+
+
+
 //#region Event Handlers
 
-Device.onLoad = () => { }
+Device.onBlur = (e) => { };
+document.addEventListener("blur", Device.Blur, false);
+Device.onFocus = (e) => { };
+document.addEventListener("focus", Device.onFocus, false);
+Device.onSubmit = (e) => { };
+document.addEventListener("submit", Device.onSubmit, false);
+Device.onReset = (e) => { };
+document.addEventListener("reset", Device.onReset, false);
+Device.onFullscreenChange = (e) => { };
+document.addEventListener("fullscreenchange", Device.onFullscreenChange, false);
+Device.onResize = () => { };
+document.addEventListener("resize", Device.onResize, false);
+Device.onScroll = (e) => { };
+document.addEventListener("scroll", Device.onScroll, false);
+Device.onCut = (e) => { };
+document.addEventListener("cut", Device.onCut, false);
+Device.onCopy = (e) => { };
+document.addEventListener("copy", Device.onCopy, false);
 
-Device.onSubmit = () => { }
+Device.onPaste = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    data = e.clipboardData || window.clipboardData;
+    // Input is the variable of your choice that becomes the clipboard text
+    Input = data.getData("Text").replace(/\s/g, "");
+};
+document.addEventListener("paste", Device.onPaste, false);
 
-Device.onReset = () => { }
+Device.onKeyDown = (e) => { };
+document.addEventListener("keydown", Device.onKeyDown, false);
+Device.onKeyPress = (e) => { };
+document.addEventListener("keypress", Device.onKeyPress, false);
+Device.onKeyUp = (e) => { };
+document.addEventListener("keyup", Device.onKeyUp, false);
+Device.onMouseAuxClick = (e) => { };
+document.addEventListener("auxclick", Device.onMouseAuxClick, false);
+Device.onMouseClick = (e) => { };
+document.addEventListener("click", Device.onMouseClick, false);
+Device.onMouseRightClick = (e) => { };
+document.addEventListener("contextmenu", Device.onMouseRightClick, false);
+Device.onMouseDblClick = (e) => { };
+document.addEventListener("dbclick", Device.onMouseDblClick, false);
+Device.onMouseDown = (e) => { };
+document.addEventListener("mousedown", Device.onMouseDown, false);
+Device.onMouseEnter = (e) => { };
+document.addEventListener("mouseenter", Device.onMouseEnter, false);
+Device.onMouseLeave = (e) => { };
+document.addEventListener("mouseleave", Device.onMouseLeave, false);
 
-Device.onFullscreenChange = () => { }
+Device.onMouseMove = (e) => {
+    Device.mouseLocation = [e.pageX, e.pageY];
+};
+document.addEventListener("mousemove", Device.onMouseMove, false);
 
-Device.onResize = () => { }
+Device.onMouseOver = (e) => { };
+document.addEventListener("mouseover", Device.onMouseOver, false);
+Device.onMouseOut = (e) => { };
+document.addEventListener("mouseout", Device.onMouseOut, false);
+Device.onMouseUp = (e) => { };
+document.addEventListener("mouseup", Device.onMouseUp, false);
+Device.onSelect = (e) => { };
+document.addEventListener("select", Device.onSelect, false);
 
-Device.onScroll = () => { }
+Device.onMouseWheel = (e) => {
+    // e.deltaY == 3 for wheelup
+    // e.deltaY == -3 for wheeldown
+};
+document.addEventListener("wheel", Device.onMouseWheel, false);
 
-Device.onCut = () => { }
-
-Device.onCopy = () => { }
-
-Device.onPaste = () => { }
-
-Device.onKeyDown = () => { }
-
-Device.onKeyPress = () => { }
-
-Device.onKeyUp = () => { }
-
-Device.onMouseAuxClick = () => { }
-
-Device.onMouseClick = () => { }
-
-Device.onMouseRightClick = () => { }
-
-Device.onMouseDblClick = () => { }
-
-Device.onMouseDown = () => { }
-
-Device.onMouseEnter = () => { }
-
-Device.onMouseLeave = () => { }
-
-Device.onMouseMove = () => { }
-
-Device.onMouseOver = () => { }
-
-Device.onMouseOut = () => { }
-
-Device.onMouseUp = () => { }
-
-Device.onSelect = () => { }
-
-Device.onMouseWheel = () => { }
+Device.onDrag = (e) => { };
+document.addEventListener("drag", Device.onDrag, false);
+Device.onDragEnd = (e) => { };
+document.addEventListener("dragend", Device.onDragEnd, false);
+Device.onDragEnter = (e) => { };
+document.addEventListener("dragenter", Device.onDragEnter, false);
+Device.onDragStart = (e) => { };
+document.addEventListener("dragstart", Device.onDragStart, false);
+Device.onDragLeave = (e) => { };
+document.addEventListener("load", Device.onDragLeave, false);
+Device.onDragOver = (e) => { };
+document.addEventListener("dragover", Device.onDragOver, false);
+Device.onDragDrop = (e) => { };
+document.addEventListener("drop", Device.onDragDrop, false);
+Device.onLoadAbort = (e) => { };
+document.addEventListener("abort", Device.onLoadAbort, false);
+Device.onLoadError = (e) => { };
+document.addEventListener("load", Device.onLoadError, false);
+Device.onLoad = (e) => { };
+document.addEventListener("load", Device.onLoad, false);
+Device.onLoadEnd = (e) => { };
+document.addEventListener("loadend", Device.onLoadEnd, false);
+Device.onLoadStart = (e) => { };
+document.addEventListener("loadstart", Device.onLoadStart, false);
+Device.onLoadProgress = (e) => { };
+document.addEventListener("progress", Device.onLoadProgress, false);
+Device.onLoadTimeout = (e) => { };
+document.addEventListener("timeout", Device.onLoadTimeout, false);
+Device.onVisibilityChange = (e) => { };
+document.addEventListener("visibilitychange", Device.onVisibilityChange, false);
+Device.onTouchCancel = (e) => { };
+document.addEventListener("touchcancel", Device.onTouchCancel, false);
+Device.onTouchEnd = (e) => { };
+document.addEventListener("touchend", Device.onTouchEnd, false);
+Device.onTouchMove = (e) => { };
+document.addEventListener("touchmove", Device.onTouchMove, false);
+Device.onTouchStart = (e) => { };
+document.addEventListener("touchstart", Device.onTouchStart, false);
+Device.onPointerOver = (e) => { };
+document.addEventListener("pointerover", Device.onPointerOver, false);
+Device.onPointerEnter = (e) => { };
+document.addEventListener("pointerenter", Device.onPointerEnter, false);
+Device.onPointerDown = () => { };
+document.addEventListener("pointerdown", Device.onPointerDown, false);
+Device.onPointerMove = (e) => { };
+document.addEventListener("pointermove", Device.onPointerMove, false);
+Device.onPointerUp = (e) => { };
+document.addEventListener("pointerup", Device.onPointerUp, false);
+Device.onPointerCancel = (e) => { };
+document.addEventListener("pointercancel", Device.onPointerCancel, false);
+Device.onPointerOut = (e) => { };
+document.addEventListener("pointerout", Device.onPointerOut, false);
+Device.onPointerLeave = (e) => { };
+document.addEventListener("pointerleave", Device.onPointerLeave, false);
+Device.onGotPointerCapture = (e) => { };
+document.addEventListener("gotpointercapture", Device.onGotPointerCapture, false);
+Device.onLostPointerCapture = (e) => { };
+document.addEventListener("lostpointercapture", Device.onLostPointerCapture, false);
 
 
 //#endregion Event Handlers
-
-//#endregion Initial Adjustments
 
 
 
@@ -147,64 +237,10 @@ const Cast = () => {
 
 
 
-//#region Event Registration
-
-// Track the mouse movement of the player
-document.addEventListener("mousemove", onMUpdate, false);
-// Track the mousewheel of the player
-document.addEventListener("wheel", onWUpdate, false);
-// Track clicks
-document.addEventListener("mousedown", onMouse, false);
-
-document.addEventListener("keydown", onKey, false);
-
-document.addEventListener("paste", onPaste, false);
-
-
-function onPaste(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    data = e.clipboardData || window.clipboardData;
-    // Input is the variable of your choice that becomes the clipboard text
-    Input = data.getData("Text").replace(/\s/g, "");
-}
-
-
-// This gets hoisted
-function onMUpdate(e) {
-    // Your logic goes here
-
-
-    // Account the last recorded mouse position
-    mouseLocation = [e.pageX, e.pageY];
-}
-
-
-// This gets hoisted
-function onWUpdate(e) {
-    // e.deltaY = 3 for wheelup
-    // e.deltaY = -3 for wheeldown
-}
-
-
-// This gets hoisted up per request
-function onKey(e) {
-
-}
-
-
-// This gets hoisted
-function onMouse(e) {
-
-}
-
-//#endregion Event Handling
-
-
 //#region Run
 
 function Run() {
-    Maxout();
+    Drawing.maxout();
 
     Cast();
     window.requestAnimationFrame(Run);
