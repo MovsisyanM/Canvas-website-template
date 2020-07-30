@@ -38,7 +38,22 @@ const Rotate = (x, y, Theta, aboutX, aboutY) => {
 
 
 const Rotate3D = (x, y, z, pitch, yaw, roll) => {
-    return; // IMPLEMENT 
+    // Pitch
+    let xPitch = x;
+    let yPitch = y * Math.cos(pitch) - Math.sin(pitch) * y;
+    let zPitch = z * Math.sin(pitch) + Math.cos(pitch) * z;
+
+    // Yaw
+    let xYaw = xPitch * Math.cos(yaw) + xPitch * Math.sin(yaw);
+    let yYaw = yPitch;
+    let zYaw = zPitch * Math.cos(yaw) - Math.sin(yaw) * zPitch;
+
+    // Roll
+    let xRoll = xYaw * Math.cos(roll) - Math.sin(roll) * xYaw;
+    let yRoll = yYaw * Math.sin(roll) + Math.cos(roll) * yYaw;
+    let zRoll = zYaw
+
+    return (xRoll, yRoll, zRoll);
 }
 
 
