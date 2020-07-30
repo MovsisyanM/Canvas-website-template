@@ -79,6 +79,8 @@ Drawing.canvas = document.querySelector("canvas");
 Drawing.context = canvas.getContext("2d");
 // Pixel density
 Drawing.pixelDensity = 1;
+// Scroll position
+Drawing.scroll = 0
 // Set canvas to fullscreen
 Drawing.maxout = () => {
     canvas.width = window.innerWidth * Drawing.pixelDensity;
@@ -236,6 +238,74 @@ document.addEventListener("lostpointercapture", Device.onLostPointerCapture, fal
 
 
 //#endregion Event Handlers
+
+
+
+//#region Classes
+
+// For the future maybe?
+
+//class Drawable {
+//    constructor(zIndex) {
+//        this.zIndex = zIndex
+//    }
+//
+//    draw(offsetX = 0, offsetY = 0, offsetZ = 0, scaleX = 1, scaleY = 1, scaleZ = 1) {
+//        console.log("draw() not implemented in " + String(this))
+//    }
+//}
+//
+//
+//class Container extends Drawable {
+//    constructor(zIndex) {
+//        super(zIndex);
+//        this.items = [];
+//    }
+//
+//    get length() {
+//        return this.items.length;
+//    }
+//
+//    addItem(item) {
+//        if (item instanceof Drawable) { console.log("Tried to store a non-drawable object in " + String(this)) }
+//        let pos = 0
+//        this.items.forEach(e => {
+//            if (e.zIndex < item.zIndex) {
+//                pos++;
+//                continue;
+//            }
+//            this.items.splice(pos, 0, item)
+//            break;
+//        });
+//    }
+//
+//    removeItem(index) {
+//        this.items.splice(index, 1)
+//    }
+//
+//    draw(offsetX = 0, offsetY = 0, offsetZ = 0, scaleX = 1, scaleY = 1, scaleZ = 1) {
+//        this.items.forEach(item => {
+//            item.draw()
+//        });
+//    }
+//}
+//
+//
+//class Stack extends Container {
+//    constructor(width, height, zIndex) {
+//        super(zIndex);
+//        this.width = width;
+//        this.height = height;
+//    }
+//
+//    addItem(item)
+//
+//    draw() {
+//
+//    }
+//}
+
+//#endregion Classes
 
 
 
